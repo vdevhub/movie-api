@@ -54,13 +54,11 @@ let topMovies = [
   }
 ];
 
+app.use(express.static('public'));
+
 // GET requests
 app.get('/', (req, res) => {
   res.send('Welcome to my movies list!');
-});
-
-app.get('/documentation', (req, res) => {                  
-  res.sendFile('public/documentation.html', { root: __dirname });
 });
 
 app.get('/movies', (req, res) => {
