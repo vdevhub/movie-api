@@ -67,6 +67,10 @@ app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Error occurred!');
+});
 
 // listen for requests
 app.listen(8080, () => {
