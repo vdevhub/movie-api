@@ -66,7 +66,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-  res.json(topMovies);
+  res.status(200).json(topMovies);
+});
+
+app.get('/movies/:title', (req, res) => {
+  const title = req.params.title;
+  const movie = topMovies.find(movie => movie.Title === title);
+
+  if (movie) {
+    res.status(200).json(movie);
+  }
+  else {
+    res.status(400).send('No such movie');
+  }
 });
 
 app.use((err, req, res, next) => {
