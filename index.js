@@ -8,52 +8,122 @@ let topMovies = [
   {
     title: 'Pearl Harbor',
     year: '2001',
-    director: 'Michael Bay'
+    director: {
+      name: 'Michael Bay',
+      bio: 'It is a director.'
+    },
+    genre:  {
+      name: 'Drama',
+      description: 'Some genre'
+    }
   },
   {
     title: 'Suite Française',
     year: '2014',
-    director: 'Saul Dibb'
+    director: {
+      name: 'Saul Dibb',
+      bio: 'It is a director.'
+    },
+    genre:  {
+      name: 'Drama',
+      description: 'Some genre'
+    }
   },
   {
     title: 'Crashpoint - 90 Minuten bis zum Absturz',
     year: '2009',
-    director: 'Thomas Jauch'
+    director: {
+      name: 'Thomas Jauch',
+      bio: 'It is a director.'
+    },
+    genre:  {
+      name: 'Drama',
+      description: 'Some genre'
+    }
   },
   {
     title: 'Armageddon',
     year: '1998',
-    director: 'Michael Bay'
+    director: {
+      name: 'Michael Bay',
+      bio: 'It is a director.'
+    },
+    genre:  {
+      name: 'Drama',
+      description: 'Some genre'
+    }
   },
   {
     title: 'Taken',
     year: '2008',
-    director: 'Pierre Morel'
+    director: {
+      name: 'Pierre Morel',
+      bio: 'It is a director.'
+    },
+    genre:  {
+      name: 'Drama',
+      description: 'Some genre'
+    }
   },
   {
     title: 'La bella e la bestia',
     year: '2014',
-    director: 'Fabrizio Costa'
+    director: {
+      name: 'Fabrizio Costa',
+      bio: 'It is a director.'
+    },
+    genre:  {
+      name: 'Drama',
+      description: 'Some genre'
+    }
   },
   {
     title: 'Ein Sommer in Griechenland',
     year: '2015',
-    director: 'Jorgo Papavassiliou'
+    director: {
+      name: 'Jorgo Papavassiliou',
+      bio: 'It is a director.'
+    },
+    genre:  {
+      name: 'Drama',
+      description: 'Some genre'
+    }
   },
   {
     title: 'Schindler\'s List',
     year: '1993',
-    director: 'Steven Spielberg'
+    director: {
+      name: 'Steven Spielberg',
+      bio: 'It is a director.'
+    },
+    genre:  {
+      name: 'Drama',
+      description: 'Some genre'
+    }
   },
   {
     title: 'Eat, Pray, Love',
     year: '2010',
-    director: 'Ryan Murphy'
+    director: {
+      name: 'Ryan Murphy',
+      bio: 'It is a director.'
+    },
+    genre:  {
+      name: 'Drama',
+      description: 'Some genre'
+    }
   },
   {
     title: 'Ocean\'s Eleven',
     year: '2001',
-    director: 'Steven Soderbergh'
+    director: {
+      name: 'Steven Soderbergh',
+      bio: 'It is a director.'
+    },
+    genre:  {
+      name: 'Drama',
+      description: 'Some genre'
+    }
   }
 ];
 
@@ -71,13 +141,37 @@ app.get('/movies', (req, res) => {
 
 app.get('/movies/:title', (req, res) => {
   const title = req.params.title;
-  const movie = topMovies.find(movie => movie.Title === title);
+  const movie = topMovies.find(movie => movie.title === title);
 
   if (movie) {
     res.status(200).json(movie);
   }
   else {
     res.status(400).send('No such movie');
+  }
+});
+
+app.get('/movies/genre/:genreName', (req, res) => {
+  const genreName = req.params.genreName;
+  const genre = topMovies.find(movie => movie.genre.name === genreName).genre;
+
+  if (genre) {
+    res.status(200).json(genre);
+  }
+  else {
+    res.status(400).send('No such genre');
+  }
+});
+
+app.get('/movies/director/:directorName', (req, res) => {
+  const directorName = req.params.directorName;
+  const director = topMovies.find(movie => movie.director === directorName).director;
+
+  if (director) {
+    res.status(200).json(director);
+  }
+  else {
+    res.status(400).send('No such genre');
   }
 });
 
