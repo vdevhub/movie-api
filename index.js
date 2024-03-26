@@ -2,6 +2,8 @@ const express = require('express'),
       morgan = require('morgan');
 const app = express();
 
+let users = [];
+
 let topMovies = [
   {
     title: 'Pearl Harbor',
