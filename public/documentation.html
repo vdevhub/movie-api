@@ -3,31 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
   <title>Documentation</title>
 </head>
 <body>
-  <h1>Movie API Documentation</h1>
-  <h2>API Intro</h2>
-  <p>Movie API is a REST API for an application that interacts with a database that stores data about different movies.</p>
-  <h2>Supported Requests</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Business Logic</th>
-        <th>URL Endpoints</th>
-        <th>HTTP Method</th>
-        <th>Request Body Format</th>
-        <th>Response Body Format</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Return a list of ALL movies to the user</td>
-        <td>/movies</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object holding data about all the movies:
-          <code>
+  <main>
+    <h1>Movie API Documentation</h1>
+    <h2>API Intro</h2>
+    <p>Movie API is a REST API for an application that interacts with a database that stores data about different
+      movies.</p>
+    <h2>Supported Requests</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Business Logic</th>
+          <th>URL Endpoints</th>
+          <th>HTTP Method</th>
+          <th>Request Body Format</th>
+          <th>Response Body Format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Return a list of ALL movies to the user</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>A JSON object holding data about all the movies:
+            <code>
             <pre>
             [
               {
@@ -57,15 +61,15 @@
             ]
             </pre>
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Return data about a single movie by title to the user</td>
-        <td>/movies/[movieTitle]</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object holding data about the requested movie:
-          <code>
+          </td>
+        </tr>
+        <tr>
+          <td>Return data about a single movie by title to the user</td>
+          <td>/movies/[movieTitle]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>A JSON object holding data about the requested movie:
+            <code>
             <pre>
               {
                 "title": "Eat, Pray, Love",
@@ -81,15 +85,15 @@
               }
             </pre>
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Return data about a genre (description) by name (e.g., “Thriller”)</td>
-        <td>/movies/genres/[genreName]</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object holding data about the requested genre:
-          <code>
+          </td>
+        </tr>
+        <tr>
+          <td>Return data about a genre (description) by name (e.g., “Thriller”)</td>
+          <td>/movies/genres/[genreName]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>A JSON object holding data about the requested genre:
+            <code>
             <pre>
               {
                 "name": "Drama",
@@ -97,15 +101,15 @@
               }
             </pre>
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Return data about a director (bio, birth year, death year) by name</td>
-        <td>/movies/director/[directorName]</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object holding data about the requested director:
-          <code>
+          </td>
+        </tr>
+        <tr>
+          <td>Return data about a director (bio, birth year, death year) by name</td>
+          <td>/movies/director/[directorName]</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>A JSON object holding data about the requested director:
+            <code>
             <pre>
               {
                 "name": "Michael Bay",
@@ -113,14 +117,14 @@
               }
             </pre>
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Register a new user</td>
-        <td>/users</td>
-        <td>POST</td>
-        <td>A JSON object holding data about the user to be added, for example:
-          <code>
+          </td>
+        </tr>
+        <tr>
+          <td>Register a new user</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>A JSON object holding data about the user to be added, for example:
+            <code>
             <pre>
             {
               "name": "Mary",
@@ -128,9 +132,9 @@
             }
             </pre>
           </code>
-        </td>
-        <td>A JSON object holding data about the newly added user and their new ID:
-          <code>
+          </td>
+          <td>A JSON object holding data about the newly added user and their new ID:
+            <code>
             <pre>
               {
                 "name": "Mary",
@@ -139,14 +143,14 @@
               }
             </pre>
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Update user information</td>
-        <td>/users/[id]</td>
-        <td>PUT</td>
-        <td>A JSON object holding data to be updated for the user, for example:
-          <code>
+          </td>
+        </tr>
+        <tr>
+          <td>Update user information</td>
+          <td>/users/[id]</td>
+          <td>PUT</td>
+          <td>A JSON object holding data to be updated for the user, for example:
+            <code>
             <pre>
             {
               "name": "Paul White",
@@ -154,9 +158,9 @@
             }
             </pre>
           </code>
-        </td>
-        <td>A JSON object holding data about the updated user:
-          <code>
+          </td>
+          <td>A JSON object holding data about the updated user:
+            <code>
             <pre>
             {
               "id": "1",
@@ -168,30 +172,32 @@
             }
             </pre>
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Add a movie to the user's list of favorites</td>
-        <td>/users/[id]/[movieTitle]</td>
-        <td>POST</td>
-        <td>None</td>
-        <td>A text message indicating whether the movie was successfully added to the user's favorite movies list</td>
-      </tr>
-      <tr>
-        <td>Remove a movie from the user's list of favorites</td>
-        <td>/users/[id]/[movieTitle]</td>
-        <td>DELETE</td>
-        <td>None</td>
-        <td>A text message indicating whether the movie was successfully removed from the user's favorite movies list</td>
-      </tr>
-      <tr>
-        <td>Deregister a user</td>
-        <td>/users/[id]</td>
-        <td>DELETE</td>
-        <td>None</td>
-        <td>A text message indicating whether the user with the specified ID was removed</td>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+        </tr>
+        <tr>
+          <td>Add a movie to the user's list of favorites</td>
+          <td>/users/[id]/[movieTitle]</td>
+          <td>POST</td>
+          <td>None</td>
+          <td>A text message indicating whether the movie was successfully added to the user's favorite movies list</td>
+        </tr>
+        <tr>
+          <td>Remove a movie from the user's list of favorites</td>
+          <td>/users/[id]/[movieTitle]</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>A text message indicating whether the movie was successfully removed from the user's favorite movies list
+          </td>
+        </tr>
+        <tr>
+          <td>Deregister a user</td>
+          <td>/users/[id]</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>A text message indicating whether the user with the specified ID was removed</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
 </body>
 </html>

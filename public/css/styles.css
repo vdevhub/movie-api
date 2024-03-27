@@ -1,0 +1,36 @@
+/*
+Setting the default width of all elements to include
+the padding and the border.
+*/
+* {
+  box-sizing: border-box;
+}
+
+/*
+Main body and headings styling.
+*/
+main {
+  margin: 60px;
+}
+
+
+/*
+Table styling
+*/
+table,
+th,
+td {
+  border: 1px solid;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+
+th,
+td {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
