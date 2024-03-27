@@ -17,7 +17,7 @@ let users = [
   }
 ];
 
-let topMovies = [
+let movies = [
   {
     title: 'Pearl Harbor',
     year: '2001',
@@ -150,12 +150,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-  res.status(200).json(topMovies);
+  res.status(200).json(movies);
 });
 
 app.get('/movies/:title', (req, res) => {
   const title = req.params.title;
-  const movie = topMovies.find(movie => movie.title === title);
+  const movie = movies.find(movie => movie.title === title);
 
   if (movie) {
     res.status(200).json(movie);
@@ -167,7 +167,7 @@ app.get('/movies/:title', (req, res) => {
 
 app.get('/movies/genre/:genreName', (req, res) => {
   const genreName = req.params.genreName;
-  const genre = topMovies.find(movie => movie.genre.name === genreName).genre;
+  const genre = movies.find(movie => movie.genre.name === genreName).genre;
 
   if (genre) {
     res.status(200).json(genre);
@@ -179,7 +179,7 @@ app.get('/movies/genre/:genreName', (req, res) => {
 
 app.get('/movies/director/:directorName', (req, res) => {
   const directorName = req.params.directorName;
-  const director = topMovies.find(movie => movie.director.name === directorName).director;
+  const director = movies.find(movie => movie.director.name === directorName).director;
 
   if (director) {
     res.status(200).json(director);
