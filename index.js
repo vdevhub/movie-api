@@ -1,5 +1,7 @@
 const express = require('express'),
-      morgan = require('morgan');
+      morgan = require('morgan'),
+      bodyParser = require('body-parser'),
+      uuid = require('uuid');
 const app = express();
 
 let users = [];
@@ -129,6 +131,7 @@ let topMovies = [
 
 app.use(morgan('common'));
 app.use(express.static('public'));
+app.use(bodyParser.json());
 
 // GET requests
 app.get('/', (req, res) => {
@@ -172,6 +175,20 @@ app.get('/movies/director/:directorName', (req, res) => {
   }
   else {
     res.status(400).send('No such genre');
+  }
+});
+
+// POST Requests
+app.post('/users', (req, res) => {
+  const newUser = req.body;
+
+  if (newUser.name) {
+    newUser.id = uuid.v4();
+    users.push(newUser);
+    res.status(201).json(newUser);
+  } 
+  else {
+    res.status(400).send('Users need names!');
   }
 });
 
