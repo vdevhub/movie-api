@@ -14,10 +14,10 @@
     <thead>
       <tr>
         <th>Business Logic</th>
-        <th>URL with Parameters</th>
+        <th>URL Endpoints</th>
         <th>HTTP Method</th>
-        <th>Request Body</th>
-        <th>Response Body</th>
+        <th>Request Body Format</th>
+        <th>Response Body Format</th>
       </tr>
     </thead>
     <tbody>
@@ -26,31 +26,97 @@
         <td>/movies</td>
         <td>GET</td>
         <td>None</td>
-        <td>A JSON object holding data about all the movies</td>
+        <td>A JSON object holding data about all the movies:
+          <code>
+            <pre>
+            [
+              {
+                "title": "Pearl Harbor",
+                "year": "2001",
+                "director": {
+                    "name": "Michael Bay",
+                    "bio": "It is a director."
+                },
+                "genre": {
+                    "name": "Drama",
+                    "description": "Some genre"
+                }
+              },
+              {
+                "title": "Suite Française",
+                "year": "2014",
+                "director": {
+                    "name": "Saul Dibb",
+                    "bio": "It is a director."
+                },
+                "genre": {
+                    "name": "Drama",
+                    "description": "Some genre"
+                }
+              }
+            ]
+            </pre>
+          </code>
+        </td>
       </tr>
       <tr>
-        <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
+        <td>Return data about a single movie by title to the user</td>
         <td>/movies/[movieTitle]</td>
         <td>GET</td>
         <td>None</td>
-        <td>A JSON object holding data about the requested movie</td>
+        <td>A JSON object holding data about the requested movie:
+          <code>
+            <pre>
+              {
+                "title": "Eat, Pray, Love",
+                "year": "2010",
+                "director": {
+                    "name": "Ryan Murphy",
+                    "bio": "It is a director."
+                },
+                "genre": {
+                    "name": "Drama",
+                    "description": "Some genre"
+                }
+              }
+            </pre>
+          </code>
+        </td>
       </tr>
       <tr>
         <td>Return data about a genre (description) by name (e.g., “Thriller”)</td>
         <td>/movies/genres/[genreName]</td>
         <td>GET</td>
         <td>None</td>
-        <td>A JSON object holding data about the requested genre</td>
+        <td>A JSON object holding data about the requested genre:
+          <code>
+            <pre>
+              {
+                "name": "Drama",
+                "description": "Some genre"
+              }
+            </pre>
+          </code>
+        </td>
       </tr>
       <tr>
         <td>Return data about a director (bio, birth year, death year) by name</td>
-        <td>/movies/director/[name]</td>
+        <td>/movies/director/[directorName]</td>
         <td>GET</td>
         <td>None</td>
-        <td>A JSON object holding data about the requested director</td>
+        <td>A JSON object holding data about the requested director:
+          <code>
+            <pre>
+              {
+                "name": "Michael Bay",
+                "bio": "It is a director."
+              }
+            </pre>
+          </code>
+        </td>
       </tr>
       <tr>
-        <td>Allow new users to register</td>
+        <td>Register a new user</td>
         <td>/users</td>
         <td>POST</td>
         <td>A JSON object holding data about the user to be added, for example:
@@ -58,15 +124,25 @@
             <pre>
             {
               "name": "Mary",
-              "favouriteMovies": []
+              "favouriteMovies": ["Titanic", "Ocean's Eleven"]
             }
             </pre>
           </code>
         </td>
-        <td>A JSON object holding data about the newly added user and their new ID</td>
+        <td>A JSON object holding data about the newly added user and their new ID:
+          <code>
+            <pre>
+              {
+                "name": "Mary",
+                "favouriteMovies": [],
+                "id": "99f22720-3b61-4294-bada-fe2fff4dfb82"
+              }
+            </pre>
+          </code>
+        </td>
       </tr>
       <tr>
-        <td>Allow users to update their user info (username)</td>
+        <td>Update user information</td>
         <td>/users/[id]</td>
         <td>PUT</td>
         <td>A JSON object holding data to be updated for the user, for example:
@@ -79,24 +155,37 @@
             </pre>
           </code>
         </td>
-        <td>A JSON object holding data about the updated user</td>
+        <td>A JSON object holding data about the updated user:
+          <code>
+            <pre>
+            {
+              "id": "1",
+              "name": "Paul White",
+              "email": "paul.white@gmail.com",
+              "favoriteMovies": [
+                   "War"
+               ]
+            }
+            </pre>
+          </code>
+        </td>
       </tr>
       <tr>
-        <td>Allow users to add a movie to their list of favorites</td>
+        <td>Add a movie to the user's list of favorites</td>
         <td>/users/[id]/[movieTitle]</td>
         <td>POST</td>
         <td>None</td>
         <td>A text message indicating whether the movie was successfully added to the user's favorite movies list</td>
       </tr>
       <tr>
-        <td>Allow users to remove a movie from their list of favorites</td>
+        <td>Remove a movie from the user's list of favorites</td>
         <td>/users/[id]/[movieTitle]</td>
         <td>DELETE</td>
         <td>None</td>
         <td>A text message indicating whether the movie was successfully removed from the user's favorite movies list</td>
       </tr>
       <tr>
-        <td>Allow existing users to deregister</td>
+        <td>Deregister a user</td>
         <td>/users/[id]</td>
         <td>DELETE</td>
         <td>None</td>
