@@ -21,5 +21,82 @@
     <li>Allow users to remove a movie from their list of favorites</li>
     <li>Allow existing users to deregister</li>
   </ul>
+  <h2>Supported Requests</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Business Logic</th>
+        <th>URL</th>
+        <th>HTTP Method</th>
+        <th>Request Body</th>
+        <th>Response Body</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Return a list of ALL movies to the user</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about all the movies</td>
+      </tr>
+      <tr>
+        <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
+        <td>/movies/[movieTitle]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about the requested movie</td>
+      </tr>
+      <tr>
+        <td>Return data about a genre (description) by name (e.g., “Thriller”)</td>
+        <td>/movies/genres/[genreName]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about the requested genre</td>
+      </tr>
+      <tr>
+        <td>Return data about a director (bio, birth year, death year) by name</td>
+        <td>/movies/director/[name]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about the requested director</td>
+      </tr>
+      <tr>
+        <td>Allow new users to register</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>A JSON object holding data about the user to be added</td>
+        <td>A JSON object holding data about the newly added user and their new ID</td>
+      </tr>
+      <tr>
+        <td>Allow users to update their user info (username)</td>
+        <td>/users/[id]</td>
+        <td>PUT</td>
+        <td>A JSON object holding data about the user to be updated</td>
+        <td>A JSON object holding data about the updated user</td>
+      </tr>
+      <tr>
+        <td>Allow users to add a movie to their list of favorites</td>
+        <td>/users/[id]/[movieTitle]</td>
+        <td>POST</td>
+        <td>None</td>
+        <td>A text message indicating whether the movie was successfully added to the user's favorite movies list</td>
+      </tr>
+      <tr>
+        <td>Allow users to remove a movie from their list of favorites</td>
+        <td>/users/[id]/[movieTitle]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message indicating whether the movie was successfully removed from the user's favorite movies list</td>
+      </tr>
+      <tr>
+        <td>Allow existing users to deregister</td>
+        <td>/users/[id]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message indicating whether the user with the specified ID was removed</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
