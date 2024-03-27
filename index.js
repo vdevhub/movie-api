@@ -4,7 +4,18 @@ const express = require('express'),
       uuid = require('uuid');
 const app = express();
 
-let users = [];
+let users = [
+  {
+    id: '1',
+    name: 'Paul K',
+    favoriteMovies: ['War']
+  },
+  {
+    id: '2',
+    name: 'Susan',
+    favoriteMovies: []
+  }
+];
 
 let topMovies = [
   {
@@ -189,6 +200,22 @@ app.post('/users', (req, res) => {
   } 
   else {
     res.status(400).send('Users need names!');
+  }
+});
+
+// PUT Requests
+app.put('/users/:id', (req, res) => {
+  const id =  req.params.id;
+  const updatedUser = req.body;
+
+  let user = users.find(user => user.id == id);
+
+  if (user) {
+    user.name = updatedUser.name;
+    res.status(200).json(user);
+  }
+  else {
+    res.status(400).send('No such user');
   }
 });
 
