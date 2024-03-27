@@ -203,6 +203,21 @@ app.post('/users', (req, res) => {
   }
 });
 
+app.post('/users/:id/:movieTitle', (req, res) => {
+  const id =  req.params.id;
+  const movieTitle =  req.params.movieTitle;
+
+  let user = users.find(user => user.id == id);
+
+  if (user) {
+    user.favoriteMovies.push(movieTitle);
+    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
+  }
+  else {
+    res.status(400).send('No such user');
+  }
+});
+
 // PUT Requests
 app.put('/users/:id', (req, res) => {
   const id =  req.params.id;
