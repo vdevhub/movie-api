@@ -150,6 +150,7 @@ let movies = [
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // GET requests
 app.get('/', (req, res) => {
