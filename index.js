@@ -80,19 +80,18 @@ app.post('/users', async (req, res) => {
     })
 });
 
-app.post('/users/:id/:movieTitle', (req, res) => {
-  const id =  req.params.id;
-  const movieTitle =  req.params.movieTitle;
-
-  let user = users.find(user => user.id == id);
-
-  if (user) {
-    user.favoriteMovies.push(movieTitle);
-    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
-  }
-  else {
-    res.status(400).send('No such user');
-  }
+app.post('/users/:id/:movieId', async (req, res) => {
+  await Users.findOneAndUpdate({ _id: req.params.id }, {
+    $push: { FavouriteMovies: req.params.movieId } 
+   },
+   { new: true })
+   .then((updatedUser) => {
+    res.json(updatedUser);
+   })
+   .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+   });
 });
 
 // PUT Requests
