@@ -21,14 +21,14 @@ app.get('/', (req, res) => {
   res.send('Welcome to myFlix API!');
 });
 
-app.get('/movies', (req, res) => {
-  Movies.find()
+app.get('/movies', async (req, res) => {
+  await Movies.find()
       .then((movies) => {res.status(200).json(movies)})
       .catch((err) => {res.status(400).send('Error: ' + err)});
 });
 
-app.get('/movies/:title', (req, res) => {
-  Movies.findOne({ Title: req.params.title})
+app.get('/movies/:title', async (req, res) => {
+  await Movies.findOne({ Title: req.params.title})
       .then((movie) => {res.status(200).json(movie)})
       .catch((err) => {
         console.error(err);
@@ -36,8 +36,8 @@ app.get('/movies/:title', (req, res) => {
       });
 });
 
-app.get('/movies/genre/:genreName', (req, res) => {
-  Movies.find({ "Genre.Name": req.params.genreName})
+app.get('/movies/genre/:genreName', async (req, res) => {
+  await Movies.find({ "Genre.Name": req.params.genreName})
       .then((movies) => {res.status(200).json(movies)})
       .catch((err) => {
         console.error(err);
@@ -45,8 +45,8 @@ app.get('/movies/genre/:genreName', (req, res) => {
       });
 });
 
-app.get('/movies/director/:directorName', (req, res) => {
-  Movies.findOne({ "Director.Name": req.params.directorName})
+app.get('/movies/director/:directorName', async (req, res) => {
+  await Movies.findOne({ "Director.Name": req.params.directorName})
       .then((movie) => {res.status(200).json(movie.Director)})
       .catch((err) => {
         console.error(err);
@@ -86,7 +86,7 @@ app.post('/users/:id/:movieId', async (req, res) => {
    },
    { new: true })
    .then((updatedUser) => {
-    res.json(updatedUser);
+    res.status(200).json(updatedUser);
    })
    .catch((err) => {
     console.error(err);
@@ -106,7 +106,7 @@ app.put('/users/:id', async (req, res) => {
   },
   { new: true })
   .then((updatedUser) => {
-    res.json(updatedUser);
+    res.status(200).json(updatedUser);
   })
   .catch((err) => {
     console.error(err);
@@ -121,7 +121,7 @@ app.delete('/users/:id/:movieId', async (req, res) => {
    },
    { new: true })
    .then((updatedUser) => {
-    res.json(updatedUser);
+    res.status(200).json(updatedUser);
    })
    .catch((err) => {
     console.error(err);
