@@ -55,17 +55,29 @@ app.get('/movies/director/:directorName', (req, res) => {
 });
 
 // POST Requests
-app.post('/users', (req, res) => {
-  const newUser = req.body;
-
-  if (newUser.name) {
-    newUser.id = uuid.v4();
-    users.push(newUser);
-    res.status(201).json(newUser);
-  } 
-  else {
-    res.status(400).send('Users need names!');
-  }
+app.post('/users', async (req, res) => {
+  await Users.findOne({ Username: req.body.Username })
+    .then ((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + ' already exists');
+      } else {
+        Users.create({
+          Username: req.body.Username,
+          Password: req.body.Password,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday
+        })
+        .then((user) => {res.status(201).json(user)})
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+        })
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    })
 });
 
 app.post('/users/:id/:movieTitle', (req, res) => {
