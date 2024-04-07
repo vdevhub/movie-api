@@ -18,11 +18,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // GET requests
 app.get('/', (req, res) => {
-  res.send('Welcome to my movies list!');
+  res.send('Welcome to myFlix API!');
 });
 
 app.get('/movies', (req, res) => {
-  res.status(200).json(movies);
+  Movies.find()
+      .then((movies) => {res.status(200).json(movies)})
+      .catch((err) => {res.status(400).send('Resource not found: ' + err)});
 });
 
 app.get('/movies/:title', (req, res) => {
