@@ -115,19 +115,18 @@ app.put('/users/:id', async (req, res) => {
 });
 
 // DELETE Requests
-app.delete('/users/:id/:movieTitle', (req, res) => {
-  const id =  req.params.id;
-  const movieTitle =  req.params.movieTitle;
-
-  let user = users.find(user => user.id == id);
-
-  if (user) {
-    user.favoriteMovies = user.favoriteMovies.filter(title => title !== movieTitle);
-    res.status(200).send(`${movieTitle} has been removed from user ${id}'s array`);
-  }
-  else {
-    res.status(400).send('No such user');
-  }
+app.delete('/users/:id/:movieId', async (req, res) => {
+  await Users.findOneAndUpdate({ _id: req.params.id }, {
+    $pull: { FavouriteMovies: req.params.movieId } 
+   },
+   { new: true })
+   .then((updatedUser) => {
+    res.json(updatedUser);
+   })
+   .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+   });
 });
 
 app.delete('/users/:id', (req, res) => {
