@@ -37,15 +37,12 @@ app.get('/movies/:title', (req, res) => {
 });
 
 app.get('/movies/genre/:genreName', (req, res) => {
-  const genreName = req.params.genreName;
-  const genre = movies.find(movie => movie.genre.name === genreName).genre;
-
-  if (genre) {
-    res.status(200).json(genre);
-  }
-  else {
-    res.status(400).send('No such genre');
-  }
+  Movies.find({ "Genre.Name": req.params.genreName})
+      .then((movies) => {res.status(200).json(movies)})
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
 });
 
 app.get('/movies/director/:directorName', (req, res) => {
