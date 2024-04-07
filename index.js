@@ -46,15 +46,12 @@ app.get('/movies/genre/:genreName', (req, res) => {
 });
 
 app.get('/movies/director/:directorName', (req, res) => {
-  const directorName = req.params.directorName;
-  const director = movies.find(movie => movie.director.name === directorName).director;
-
-  if (director) {
-    res.status(200).json(director);
-  }
-  else {
-    res.status(400).send('No such genre');
-  }
+  Movies.findOne({ "Director.Name": req.params.directorName})
+      .then((movie) => {res.status(200).json(movie.Director)})
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
 });
 
 // POST Requests
