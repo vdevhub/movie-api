@@ -24,19 +24,16 @@ app.get('/', (req, res) => {
 app.get('/movies', (req, res) => {
   Movies.find()
       .then((movies) => {res.status(200).json(movies)})
-      .catch((err) => {res.status(400).send('Resource not found: ' + err)});
+      .catch((err) => {res.status(400).send('Error: ' + err)});
 });
 
 app.get('/movies/:title', (req, res) => {
-  const title = req.params.title;
-  const movie = movies.find(movie => movie.title === title);
-
-  if (movie) {
-    res.status(200).json(movie);
-  }
-  else {
-    res.status(400).send('No such movie');
-  }
+  Movies.findOne({ Title: req.params.title})
+      .then((movie) => {res.status(200).json(movie)})
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
 });
 
 app.get('/movies/genre/:genreName', (req, res) => {
