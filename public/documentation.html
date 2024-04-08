@@ -30,33 +30,45 @@
           <td>/movies</td>
           <td>GET</td>
           <td>None</td>
-          <td>A JSON object holding data about all the movies:
+          <td>A JSON object holding data about all the movies. Example:
             <code>
             <pre>
-            [
+              [
               {
-                "title": "Pearl Harbor",
-                "year": "2001",
-                "director": {
-                    "name": "Michael Bay",
-                    "bio": "It is a director."
-                },
-                "genre": {
-                    "name": "Drama",
-                    "description": "Some genre"
-                }
+                  "Genre": {
+                      "Name": "Adventure",
+                      "Description": "Adventure films typically involve characters embarking on a journey or quest, often featuring excitement, exploration, and risk-taking."
+                  },
+                  "Director": {
+                      "Name": "Steven Spielberg",
+                      "Bio": "Steven Allan Spielberg is an American film director, producer, and screenwriter. He is considered one of the founding pioneers of the New Hollywood era and one of the most popular directors and producers in film history. Spielberg's films have covered a wide range of genres, including adventure, science fiction, and historical dramas.",
+                      "Birth": "1946-12-18T00:00:00.000Z",
+                      "Death": null
+                  },
+                  "Actors": [],
+                  "_id": "660ced34a8e808e3b590a90c",
+                  "Title": "Jurassic Park",
+                  "Description": "An industrialist invites some experts to visit his theme park of cloned dinosaurs. After a power failure, the creatures run loose, putting everyone's lives, including his grandchildren's, in danger.",
+                  "ImagePath": "jurassicpark.png",
+                  "Featured": true
               },
               {
-                "title": "Suite Française",
-                "year": "2014",
-                "director": {
-                    "name": "Saul Dibb",
-                    "bio": "It is a director."
-                },
-                "genre": {
-                    "name": "Drama",
-                    "description": "Some genre"
-                }
+                  "Genre": {
+                      "Name": "Drama",
+                      "Description": "Drama films are intended to portray realistic characters, settings, life situations, and stories."
+                  },
+                  "Director": {
+                      "Name": "Quentin Tarantino",
+                      "Bio": "Quentin Jerome Tarantino is an American film director, screenwriter, producer, and actor. He is known for his nonlinear storytelling, satirical subject matter, and extensive use of dialogue. Tarantino's films often explore themes of violence, pop culture, and vengeance.",
+                      "Birth": "1963-03-27T00:00:00.000Z",
+                      "Death": null
+                  },
+                  "Actors": [],
+                  "_id": "660ceec8a8e808e3b590a90d",
+                  "Title": "Pulp Fiction",
+                  "Description": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+                  "ImagePath": "pulpfiction.png",
+                  "Featured": true
               }
             ]
             </pre>
@@ -64,7 +76,7 @@
           </td>
         </tr>
         <tr>
-          <td>Return data about a single movie by title to the user</td>
+          <td>Return data about a single movie by title. Example:</td>
           <td>/movies/[movieTitle]</td>
           <td>GET</td>
           <td>None</td>
@@ -72,23 +84,29 @@
             <code>
             <pre>
               {
-                "title": "Eat, Pray, Love",
-                "year": "2010",
-                "director": {
-                    "name": "Ryan Murphy",
-                    "bio": "It is a director."
+                "Genre": {
+                    "Name": "Adventure",
+                    "Description": "Adventure films typically involve characters embarking on a journey or quest, often featuring excitement, exploration, and risk-taking."
                 },
-                "genre": {
-                    "name": "Drama",
-                    "description": "Some genre"
-                }
+                "Director": {
+                    "Name": "Steven Spielberg",
+                    "Bio": "Steven Allan Spielberg is an American film director, producer, and screenwriter. He is considered one of the founding pioneers of the New Hollywood era and one of the most popular directors and producers in film history. Spielberg's films have covered a wide range of genres, including adventure, science fiction, and historical dramas.",
+                    "Birth": "1946-12-18T00:00:00.000Z",
+                    "Death": null
+                },
+                "Actors": [],
+                "_id": "660ced34a8e808e3b590a90c",
+                "Title": "Jurassic Park",
+                "Description": "An industrialist invites some experts to visit his theme park of cloned dinosaurs. After a power failure, the creatures run loose, putting everyone's lives, including his grandchildren's, in danger.",
+                "ImagePath": "jurassicpark.png",
+                "Featured": true
               }
             </pre>
           </code>
           </td>
         </tr>
         <tr>
-          <td>Return data about a genre (description) by name (e.g., “Thriller”)</td>
+          <td>Return data about a genre by name (e.g., "Drama"). Example:</td>
           <td>/movies/genres/[genreName]</td>
           <td>GET</td>
           <td>None</td>
@@ -96,8 +114,8 @@
             <code>
             <pre>
               {
-                "name": "Drama",
-                "description": "Some genre"
+                "Name": "Drama",
+                "Description": "Drama films are intended to portray realistic characters, settings, life situations, and stories."
               }
             </pre>
           </code>
@@ -108,12 +126,14 @@
           <td>/movies/director/[directorName]</td>
           <td>GET</td>
           <td>None</td>
-          <td>A JSON object holding data about the requested director:
+          <td>A JSON object holding data about the requested director. Example:
             <code>
             <pre>
               {
-                "name": "Michael Bay",
-                "bio": "It is a director."
+                "Name": "Steven Spielberg",
+                "Bio": "Steven Allan Spielberg is an American film director, producer, and screenwriter. He is considered one of the founding pioneers of the New Hollywood era and one of the most popular directors and producers in film history. Spielberg's films have covered a wide range of genres, including adventure, science fiction, and historical dramas.",
+                "Birth": "1946-12-18T00:00:00.000Z",
+                "Death": null
               }
             </pre>
           </code>
@@ -123,13 +143,17 @@
           <td>Register a new user</td>
           <td>/users</td>
           <td>POST</td>
-          <td>A JSON object holding data about the user to be added, for example:
+          <td>A JSON object holding data about the user to be added.<br>
+              Username, Password, and Email are mandatory. Birthday and FavouriteMovies (array of movie IDs) are optional.<br>
+              Example:
             <code>
             <pre>
-            {
-              "name": "Mary",
-              "favouriteMovies": ["Titanic", "Ocean's Eleven"]
-            }
+              {
+                "Username": "Mary",
+                "Password": "iamcool-mary002",
+                "Email": "mary.loo.smith@gmail.com",
+                "Birthday": "1990-12-15"
+              }
             </pre>
           </code>
           </td>
@@ -137,9 +161,13 @@
             <code>
             <pre>
               {
-                "name": "Mary",
-                "favouriteMovies": [],
-                "id": "99f22720-3b61-4294-bada-fe2fff4dfb82"
+                "Username": "Mary",
+                "Password": "iamcool-mary002",
+                "Email": "mary.loo.smith@gmail.com",
+                "Birthday": "1990-12-15T00:00:00.000Z",
+                "FavouriteMovies": [],
+                "_id": "66138760d23e6b6f7ccad769",
+                "__v": 0
               }
             </pre>
           </code>
@@ -149,44 +177,76 @@
           <td>Update user information</td>
           <td>/users/[id]</td>
           <td>PUT</td>
-          <td>A JSON object holding data to be updated for the user, for example:
+          <td>A JSON object holding data to be updated for the user. Example:
             <code>
             <pre>
-            {
-              "name": "Paul White",
-              "email": "paul.white@gmail.com"
-            }
+              {
+                "Password": "more-complex-pass-4-john-holiday",
+                "Email": "john.robert.doe@gmail.com"
+              }
             </pre>
           </code>
           </td>
-          <td>A JSON object holding data about the updated user:
+          <td>A JSON object holding data about the updated user. Example:
             <code>
             <pre>
-            {
-              "id": "1",
-              "name": "Paul White",
-              "email": "paul.white@gmail.com",
-              "favoriteMovies": [
-                   "War"
-               ]
-            }
+              {
+                "_id": "660cfe54a8e808e3b590a917",
+                "Username": "john_doe",
+                "Password": "more-complex-pass-4-john-holiday",
+                "Email": "john.robert.doe@gmail.com",
+                "Birthday": "1985-03-20T00:00:00.000Z",
+                "FavouriteMovies": [
+                    "660cf441a8e808e3b590a915"
+                ]
+              }
             </pre>
           </code>
           </td>
         </tr>
         <tr>
           <td>Add a movie to the user's list of favorites</td>
-          <td>/users/[id]/[movieTitle]</td>
+          <td>/users/[id]/[movieId]</td>
           <td>POST</td>
           <td>None</td>
-          <td>A text message indicating whether the movie was successfully added to the user's favorite movies list</td>
+          <td>A JSON object holding data about the updated user, including their list of favourite movies. Example:
+            <code>
+            <pre>
+              {
+                "_id": "660cfe54a8e808e3b590a917",
+                "Username": "john_doe",
+                "Password": "more-complex-pass-4-john-holiday",
+                "Email": "john.robert.doe@gmail.com",
+                "Birthday": "1985-03-20T00:00:00.000Z",
+                "FavouriteMovies": [
+                    "660cf441a8e808e3b590a915",
+                    "660ced34a8e808e3b590a90c"
+                ]
+              }
+            </pre>
+          </code>
+          </td>
         </tr>
         <tr>
           <td>Remove a movie from the user's list of favorites</td>
-          <td>/users/[id]/[movieTitle]</td>
+          <td>/users/[id]/[movieId]</td>
           <td>DELETE</td>
           <td>None</td>
-          <td>A text message indicating whether the movie was successfully removed from the user's favorite movies list
+          <td>A JSON object holding data about the updated user, including their list of favourite movies where the specified movie is deleted. Example:
+            <code>
+            <pre>
+              {
+                "_id": "660cfe54a8e808e3b590a917",
+                "Username": "john_doe",
+                "Password": "more-complex-pass-4-john-holiday",
+                "Email": "john.robert.doe@gmail.com",
+                "Birthday": "1985-03-20T00:00:00.000Z",
+                "FavouriteMovies": [
+                    "660cf441a8e808e3b590a915"
+                ]
+              }
+            </pre>
+          </code>
           </td>
         </tr>
         <tr>
@@ -194,7 +254,9 @@
           <td>/users/[id]</td>
           <td>DELETE</td>
           <td>None</td>
-          <td>A text message indicating whether the user with the specified ID was removed</td>
+          <td>A text message indicating whether the user with the specified ID was removed. Example:<br><br>
+            <code>User with id 66138760d23e6b6f7ccad769 was deleted</code>
+          </td>
         </tr>
       </tbody>
     </table>
