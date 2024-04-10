@@ -58,7 +58,7 @@ app.get('/movies/director/:directorName', passport.authenticate('jwt', { session
 });
 
 // POST Requests
-app.post('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.post('/users', async (req, res) => {
   await Users.findOne({ Username: req.body.Username })
     .then ((user) => {
       if (user) {
@@ -99,6 +99,10 @@ app.post('/users/:id/:movieId', passport.authenticate('jwt', { session: false })
 
 // PUT Requests
 app.put('/users/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  if(req.user.id !== req.params.id){
+    return res.status(400).send('Permission denied');
+  }
+
   await Users.findOneAndUpdate({ _id: req.params.id }, { $set:
     {
       Username: req.body.Username,
