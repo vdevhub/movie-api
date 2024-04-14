@@ -128,9 +128,19 @@ app.post('/users/:id/:movieId', passport.authenticate('jwt', { session: false })
 });
 
 // PUT Requests
-app.put('/users/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  if(req.user.id !== req.params.id){
+app.put('/users/:Username', [
+  check('Username', 'Username is required').notEmpty(),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').notEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+  ], passport.authenticate('jwt', { session: false }), async (req, res) => {
+  if(req.user.Username !== req.params.Username){
     return res.status(400).send('Permission denied');
+  }
+  
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({errors: errors.array()});
   }
 
   await Users.findOneAndUpdate({ _id: req.params.id }, { $set:
