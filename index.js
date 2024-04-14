@@ -1,3 +1,4 @@
+//Import required modules
 const express = require('express'),
       morgan = require('morgan'),
       bodyParser = require('body-parser'),
@@ -5,19 +6,23 @@ const express = require('express'),
       mongoose = require('mongoose'),
       Models = require('./models.js');
 
+//Define constants for Express, models, and input validation
 const app = express();
 const Movies = Models.Movie;
 const Users = Models.User;
 
 const { check, validationResult } = require('express-validator');
 
+//Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true});
 
+//Define usage of logging, static files, and request parsing
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//Define CORS
 const cors = require('cors');
 app.use(cors());
 // let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
@@ -32,21 +37,26 @@ app.use(cors());
 //   }
 // }));
 
+//Import requires authentication and authorization modules
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
 // GET requests
+
+// Get API root
 app.get('/', (req, res) => {
   res.send('Welcome to myFlix API!');
 });
 
+// Get all movies
 app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.find()
       .then((movies) => {res.status(200).json(movies)})
       .catch((err) => {res.status(400).send('Error: ' + err)});
 });
 
+// Get movie by title
 app.get('/movies/:title', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ Title: req.params.title})
       .then((movie) => {res.status(200).json(movie)})
@@ -56,6 +66,7 @@ app.get('/movies/:title', passport.authenticate('jwt', { session: false }), asyn
       });
 });
 
+// Get genre by genre name
 app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ "Genre.Name": req.params.genreName})
       .then((movie) => {res.status(200).json(movie.Genre)})
@@ -65,6 +76,7 @@ app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: fals
       });
 });
 
+// Get director by director name
 app.get('/movies/director/:directorName', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ "Director.Name": req.params.directorName})
       .then((movie) => {res.status(200).json(movie.Director)})
@@ -75,6 +87,8 @@ app.get('/movies/director/:directorName', passport.authenticate('jwt', { session
 });
 
 // POST Requests
+
+// Create new user
 app.post('/users', [
   check('Username', 'Username is required').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
@@ -114,6 +128,7 @@ app.post('/users', [
     })
 });
 
+// Add new favourite movie to user's list
 app.post('/users/:id/:movieId', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate({ _id: req.params.id }, {
     $push: { FavouriteMovies: req.params.movieId } 
@@ -129,6 +144,8 @@ app.post('/users/:id/:movieId', passport.authenticate('jwt', { session: false })
 });
 
 // PUT Requests
+
+// Update user's details
 app.put('/users/:id', [
   check('id', 'User id is required').notEmpty(),
   check('Username', 'Username is required').optional().isLength({min: 5}),
@@ -167,6 +184,8 @@ app.put('/users/:id', [
 });
 
 // DELETE Requests
+
+// Remove movie from user's favourite movies list
 app.delete('/users/:id/:movieId', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate({ _id: req.params.id }, {
     $pull: { FavouriteMovies: req.params.movieId } 
@@ -181,6 +200,7 @@ app.delete('/users/:id/:movieId', passport.authenticate('jwt', { session: false 
    });
 });
 
+// Delete user
 app.delete('/users/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndDelete({ _id: req.params.id })
     .then((user) => {
@@ -196,12 +216,13 @@ app.delete('/users/:id', passport.authenticate('jwt', { session: false }), async
     });
 });
 
+// General error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Error occurred!');
 });
 
-// listen for requests
+// Listen for requests
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
  console.log('Listening on Port ' + port);
