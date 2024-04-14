@@ -78,8 +78,9 @@ app.get('/movies/director/:directorName', passport.authenticate('jwt', { session
 app.post('/users', [
   check('Username', 'Username is required').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-  check('Password', 'Password is required').not().isEmpty(),
-  check('Email', 'Email does not appear to be valid').isEmail()
+  check('Password', 'Password is required and must have at least 10 characters').isLength({min: 10}),
+  check('Email', 'Email does not appear to be valid').isEmail(),
+  check('Birthday', 'Birthday is not a valid date').optional().isDate({ format: 'yyyy-mm-dd'})
   ], async (req, res) => {
   // check the validation object for errors
   let errors = validationResult(req);
@@ -132,7 +133,7 @@ app.put('/users/:id', [
   check('id', 'User id is required').notEmpty(),
   check('Username', 'Username is required').optional().isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').optional().isAlphanumeric(),
-  check('Password', 'Password is required').optional().notEmpty(),
+  check('Password', 'Password must have at least 10 characters').optional().isLength({min: 10}),
   check('Email', 'Email does not appear to be valid').optional().isEmail(),
   check('Birthday', 'Birthday is not a valid date').optional().isDate({ format: 'yyyy-mm-dd'})
   ], passport.authenticate('jwt', { session: false }), async (req, res) => {
@@ -145,10 +146,12 @@ app.put('/users/:id', [
     return res.status(400).send('Permission denied');
   }
 
+  let hashedPassword = Users.hashPassword(req.body.Password);
+
   await Users.findOneAndUpdate({ _id: req.params.id }, { $set:
     {
       Username: req.body.Username,
-      Password: req.body.Password,
+      Password: hashedPassword,
       Email: req.body.Email,
       Birthday: req.body.Birthday
     }
