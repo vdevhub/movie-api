@@ -190,7 +190,7 @@ app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: fals
  * 
  * @example
  * // Request URL example:
- * // GET /movies/director/Christopher%20Nolan
+ * // GET http://localhost:8080/movies/director/Steven%20Spielberg
  * 
  * // Example response structure:
  * // {
@@ -222,6 +222,9 @@ app.get('/movies/director/:directorName', passport.authenticate('jwt', { session
  * @returns {void} Sends a JSON response with the created user's details, or an error message.
  * 
  * @example
+ * // Request URL example:
+ * // GET http://localhost:8080/users
+ * 
  * // Request body example:
  * // {
  * //   "Username": "johndoe",
@@ -291,7 +294,7 @@ app.post('/users', [
  * 
  * @example
  * // Request URL example:
- * // POST /users/60d5f60d54d7f254f8b5e80d/60d5f70d54d7f254f8b5e81f
+ * // POST http://localhost:8080/users/60d5f60d54d7f254f8b5e80d/60d5f70d54d7f254f8b5e81f
  * 
  * // Example response structure:
  * // {
@@ -332,7 +335,7 @@ app.post('/users/:id/:movieId', passport.authenticate('jwt', { session: false })
  * 
  * @example
  * // Request URL example:
- * // PUT /users/60d5f60d54d7f254f8b5e80d
+ * // PUT http://localhost:8080/users/60d5f60d54d7f254f8b5e80d
  * 
  * // Request body example:
  * // {
@@ -403,7 +406,7 @@ app.put('/users/:id', [
  * 
  * @example
  * // Request URL example:
- * // DELETE /users/60d5f60d54d7f254f8b5e80d/60d5f70d54d7f254f8b5e81f
+ * // DELETE http://localhost:8080/users/60d5f60d54d7f254f8b5e80d/60d5f70d54d7f254f8b5e81f
  * 
  * // Example response structure:
  * // {
@@ -442,7 +445,7 @@ app.delete('/users/:id/:movieId', passport.authenticate('jwt', { session: false 
  * 
  * @example
  * // Request URL example:
- * // DELETE /users/60d5f60d54d7f254f8b5e80d
+ * // DELETE http://localhost:8080/users/60d5f60d54d7f254f8b5e80d
  * 
  * // Example success response:
  * // "User with id 60d5f60d54d7f254f8b5e80d was deleted"
