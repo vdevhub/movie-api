@@ -17,5 +17,5 @@ git clone https://github.com/vdevhub/movie-api.git
 
 ## Tools
 To work with this project:
-- Have (Node.js)[https://nodejs.org/en/download/package-manager] installed
+- Have [Node.js](https://nodejs.org/en/download/package-manager) installed
 - If you want to create your own [MongoDB](https://www.mongodb.com/), you'll have to register at MongoDB, create your own project and database, and add its configuration to the index.js file
