@@ -7,7 +7,7 @@ The API is built with:
 - Express
 - Node.js
 
-Movie API is hosted on [Heroku](https://movies-myflix-api-84dbf8740f2d.herokuapp.com/documentation.html). It also has documentation built with JSDoc.
+Movie API is hosted on [Heroku](https://movies-myflix-api-84dbf8740f2d.herokuapp.com/documentation.html). It also has documentation built with [JSDoc](https://jsdoc.app/).
 
 ## Cloning Repository
 
@@ -17,5 +17,5 @@ git clone https://github.com/vdevhub/movie-api.git
 
 ## Tools
 To work with this project:
-- Have (Node.js([https://nodejs.org/en/download/package-manager]) installed
-- If you want to create your own (MongoDB)[https://www.mongodb.com/], you'll have to register at MongoDB, create your own project and database, and add its configuration to the index.js file
+- Have (Node.js)[https://nodejs.org/en/download/package-manager] installed
+- If you want to create your own [MongoDB](https://www.mongodb.com/), you'll have to register at MongoDB, create your own project and database, and add its configuration to the index.js file
