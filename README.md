@@ -9,6 +9,8 @@ The API is built with:
 
 Movie API is hosted on [Heroku](https://movies-myflix-api-84dbf8740f2d.herokuapp.com/documentation.html). It also has documentation built with [JSDoc](https://jsdoc.app/).
 
+![MovieAPIJSDocs](https://github.com/user-attachments/assets/af448359-370f-4118-aff7-e25b9b455247)
+
 ## Cloning Repository
 
 ```
