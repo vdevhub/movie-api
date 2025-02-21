@@ -1,13 +1,11 @@
 # Movie API
 
-This API represents a server-side component of a movie web application. The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.
+- This API represents a server-side component of a movie application.
+- It provides access to information about different movies, directors, and genres.
+- Users can sign up, update their personal information, and create a list of their favorite movies.
 
-The API is built with:
-- MongoDB
-- Express
-- Node.js
-
-Movie API is hosted on [Heroku](https://movies-myflix-api-84dbf8740f2d.herokuapp.com/documentation.html). It also has documentation built with [JSDoc](https://jsdoc.app/).
+Movie API is hosted on [Heroku](https://movies-myflix-api-84dbf8740f2d.herokuapp.com/documentation.html). 
+It also has documentation built with [JSDoc](https://jsdoc.app/).
 
 ![MovieAPIJSDocs](https://github.com/user-attachments/assets/af448359-370f-4118-aff7-e25b9b455247)
 
@@ -22,7 +20,7 @@ Movie API is hosted on [Heroku](https://movies-myflix-api-84dbf8740f2d.herokuapp
 - Allow users to remove a movie from their list of favorites.
 - Allow existing users to deregister.
 
-## Technologies
+## Tech
 - Node.js
 - Express
 - MongoDB
@@ -40,8 +38,8 @@ Movie API is hosted on [Heroku](https://movies-myflix-api-84dbf8740f2d.herokuapp
 - Heroku
 - MongoDB Atlas
 
-## Methodologies
-- REST API
+## Methods
+- REST API development and testing
 - Endpoint routing with HTTP requests
 - Serving static files
 - Logging with Morgan
@@ -54,13 +52,7 @@ Movie API is hosted on [Heroku](https://movies-myflix-api-84dbf8740f2d.herokuapp
 - Deploying API on Heroku
 - Deploying MongoDB on MongoDB Atlas
 
-## Cloning Repository
-
-```
-git clone https://github.com/vdevhub/movie-api.git
-```
-
 ## Tools
 To work with this project:
-- Have [Node.js](https://nodejs.org/en/download/package-manager) installed
-- If you want to create your own [MongoDB](https://www.mongodb.com/), you'll have to register at MongoDB, create your own project and database, and add its configuration to the index.js file
+- Have [Node.js](https://nodejs.org/en/download/package-manager) installed.
+- If you want to create your own [MongoDB](https://www.mongodb.com/), you'll have to register at MongoDB, create your project and database, and add its configuration to the index.js file.
